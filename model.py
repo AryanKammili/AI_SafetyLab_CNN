@@ -39,12 +39,13 @@ model = tf.keras.Sequential([
 
 model.compile(
     # Our Data has multiple possiblites and not two, so we use categorical cross entropy # 
-    loss = "categorical_crossentropy",
-    optimizer = tf.keras.optimizers.Adam(learning_rate=0.01),
+    # We make sure to do SPARSE cross entropy becuase our values are integers, not doing this can cause a loss of Nan #
+    loss = tf.keras.losses.SparseCategoricalCrossentropy(),
+    optimizer = tf.keras.optimizers.Adam(learning_rate=0.001),
     metrics = ["accuracy"]
 )
 
-model.fit(x_train, y_train, epochs=12)
+model.fit(x_train, y_train, epochs=1)
 
 
 
